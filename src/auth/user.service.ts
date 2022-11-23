@@ -35,7 +35,7 @@ export class UserService {
         return await this.userAuthorityRepository.save(userAuth);
     }
 
-    async transformPassword(user: UserDTO): Promise<void> {
+    async transformPassword(user: UserDTO): Promise<void> { // 패스워드 암호화
         user.password = await bcrypt.hash(
             user.password, 10,
         );

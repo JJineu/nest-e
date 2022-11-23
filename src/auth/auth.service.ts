@@ -42,14 +42,14 @@ export class AuthService {
         if(!userFind) {
             throw new UnauthorizedException();
         }
-        const validatePassword = await bcrypt.compare(userDTO.password, userFind.password);
+        const validatePassword = await bcrypt.compare(userDTO.password, userFind.password); // 암호화된 패스워드 확인
         if(!validatePassword) {
             throw new UnauthorizedException();
         }
 
         this.convertInAuthorities(userFind);
 
-        const payload: Payload = { id: userFind.id, username: userFind.username, authorities: userFind.authorities };
+        const payload: Payload = { id: userFind.id, username: userFind.username, authorities: userFind.authorities }; // payload 구성
         return {
             accessToken: this.jwtService.sign(payload)
         };
